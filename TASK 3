@@ -1,0 +1,38 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+int main() {
+    int size = 5;
+    int current_size = 0;
+    int *arr = new int[size];
+    cout << "Enter elements of array (enter -1 to stop):" << endl;
+    while (true) {
+        int n;
+        cin >> n;
+
+        if (n == -1) {
+            break;
+        }
+
+        if (current_size >= 2*size) {
+            int *newArr = new int[2 * size];
+            memcpy(newArr, arr, size * sizeof(int));
+            delete[] arr;
+            arr = newArr;
+            size *= 2;
+        }
+
+        arr[current_size] = n;
+        current_size++;
+    }
+
+    cout << "Final array elements: ";
+    for (int i = 0; i < current_size; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+
+    delete[] arr;
+    return 0;
+}
