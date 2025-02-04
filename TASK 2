@@ -1,29 +1,36 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
-void* add(void*ptr,int n);
-int main(){
+
+void* add(void* ptr, int n);
+
+int main() {
     int n;
-    cout<<"Enter number of elements you want to add"<<endl;
-    cin>>n;
+    cout << "Enter number of elements you want to add: ";
+    cin >> n;
+
     int arr[n];
-    cout<<"Enter elements of array"<<endl;
-    for (int i = 0; i < n; i++)
-    {
-       cin>>arr[i];
+    cout << "Enter elements of array:" << endl;
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
     }
-       void* result = add((void*)arr, n);
-       int *sum=(int*)result;
+
+    void* result = add((void*)arr, n);
+    int* sum = (int*)result;
 
     cout << "Sum is: " << *sum << endl;
+
+    delete sum;
+
+    return 0;
 }
-void* add(void*ptr,int n){
-    int sum=0;
-    int* arr=(int*)ptr;
-    for (int i = 0; i < n; i++)
-    {
-      sum+=*arr;
-     arr++;
+
+void* add(void* ptr, int n) {
+    int* sum = new int(0);
+    int* arr = (int*)ptr;
+
+    for (int i = 0; i < n; i++) {
+        *sum += arr[i];
     }
-    void *ret=&sum;    
-    return ret;
+
+    return sum;
 }
